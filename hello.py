@@ -1,6 +1,19 @@
 from flask import Flask
-myapp = Flask(__name__)
+from flask import request, jsonify
 
-@myapp.route("/")
-def hello():
-    return "Hello Flask, on Azure App Service for Linux"
+myapp = Flask(__name__)
+app.config["DEBUG"] = True
+
+words = [
+    {
+        "words": ["james", "may", "jeremy", "clarkson", "richard", "hammond"]
+    }
+]
+
+@myapp.route("/", methods=['GET'])
+def caps():
+    for word in words:
+        word = word.capitalize()
+    return jsonify(words)
+
+app.run()
