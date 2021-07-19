@@ -2,18 +2,17 @@ from flask import Flask
 from flask import request, jsonify
 
 myapp = Flask(__name__)
-app.config["DEBUG"] = True
+myapp.config["DEBUG"] = True
 
-words = [
-    {
-        "words": ["james", "may", "jeremy", "clarkson", "richard", "hammond"]
-    }
-]
+words =  {"word":["james", "may", "jeremy", "clarkson", "richard", "hammond"]}
 
-@myapp.route("/", methods=['GET'])
+
+@myapp.route("/api/upperCaseService", methods=['GET'])
 def caps():
-    for word in words:
-        word = word.capitalize()
-    return jsonify(words)
+    data = dict(words)
+    cap = {}
+    for key,value in data.items():
+        cap[key] = [word.capitalize() for word in value]
+    return jsonify(cap)
 
-app.run()
+myapp.run()
