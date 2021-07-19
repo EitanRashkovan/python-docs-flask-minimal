@@ -4,7 +4,7 @@ from flask import request, jsonify
 myapp = Flask(__name__)
 myapp.config["DEBUG"] = True
 
-words =  {"word":["james", "may", "jeremy", "clarkson", "richard", "hammond"]}
+words =  {"word":["here", "are", "a", "lot", "of", "words", "that", "need", "to", "all", "be", "capitalized"]}
 
 
 @myapp.route("/api/upperCaseService", methods=['GET'])
