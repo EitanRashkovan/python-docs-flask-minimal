@@ -1,18 +1,19 @@
 from flask import Flask
-from flask import request, jsonify
+from flask import request, jsonify, json
 
 myapp = Flask(__name__)
 myapp.config["DEBUG"] = True
 
-words =  {"word":["here", "are", "a", "lot", "of", "words", "that", "need", "to", "all", "be", "capitalized"]}
 
 
-@myapp.route("/api/upperCaseService", methods=['GET'])
+@myapp.route("/api/upperCaseService", methods=['GET','POST'])
 def caps():
-    data = dict(words)
+    data = dict(request.get_json())
     cap = {}
-    for key,value in data.items():
-        cap[key] = [word.capitalize() for word in value]
+    if data:
+        for key,value in data.items():
+            cap[key] = [word.capitalize() for word in value]
     return jsonify(cap)
+
 
 myapp.run()
